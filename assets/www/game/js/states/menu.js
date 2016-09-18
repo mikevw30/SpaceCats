@@ -29,29 +29,27 @@ Menu.prototype = {
 	    var gyroTextStyle = { font: "10px Arial", fill: "#e6e6e6", align: "center" };
 	    this.gyroText = game.add.text(10, 10, "x: "+gyro.getOrientation().x  +"\ny: "+gyro.getOrientation().y, gyroTextStyle);
 
-	    gyro.frequency = 10;
+//	    gyro.frequency = 10;
 		// start gyroscope detection
-		gyro.startTracking(function(o) {
-		     // updating player velocity
-//			gX = o.x;
-//			("o.x: "+o.x);
-//			gY = o.y;
-			
-		});
+//		gyro.startTracking(function(o){});
 	    
 	    this.game.input.onDown.add(this.ship.jump, this.ship);
 	    
 	    console.log("menu state");
 	},
 	update: function(){
-		this.gyroText.text =  "x: "+gyro.getOrientation().x +"\ny: "+gyro.getOrientation().y;
-		this.ship.body.velocity.x -= gyro.getOrientation().x;
-		this.ship.body.velocity.y -= gyro.getOrientation().y;
+		var gX = gyro.getOrientation().x;
+		var gY = gyro.getOrientation().y;
+
+		this.gyroText.text =  "x: "+gX +"\ny: "+gY;
 		
-		starfield.tilePosition.x -= 1;
-		if(this.ship.body.y > game.world.centerY+game.world.centerY/2){
-			this.ship.jump();
+		if(Math.abs(gX) >=1){
+			this.ship.body.velocity.x -= gX;
 		}
+		if(Math.abs(gY) >=1){
+			this.ship.body.velocity.x -= gY;
+		}
+		starfield.tilePosition.x -= 1;
 	},
 	playTheGame: function(){
 		this.game.state.start("Play");
