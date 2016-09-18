@@ -45,8 +45,8 @@ Menu.prototype = {
 	},
 	update: function(){
 		this.gyroText.text =  "x: "+gyro.getOrientation().x +"\ny: "+gyro.getOrientation().y;
-		this.ship.body.velocity.x += gyro.getOrientation().x;
-		this.ship.body.velocity.y += gyro.getOrientation().y;
+		this.ship.body.velocity.x -= gyro.getOrientation().x;
+		this.ship.body.velocity.y -= gyro.getOrientation().y;
 		
 		starfield.tilePosition.x -= 1;
 		if(this.ship.body.y > game.world.centerY+game.world.centerY/2){
