@@ -38,7 +38,7 @@ Menu.prototype = {
 	    console.log("menu state");
 	},
 	update: function(){
-		
+		this.ship.update();
 		starfield.tilePosition.x -= 1;
 	},
 	playTheGame: function(){

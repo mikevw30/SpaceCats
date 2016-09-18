@@ -4,7 +4,7 @@ var Ship = function(game, x, y, frame) {
 	Phaser.Sprite.call(this, game, x, y, 'ship', frame);
 	this.name = 'ship';
   
-	this.anchor.setTo(-0.2, 0.5);
+	this.anchor.setTo(0.5);
 	this.game.physics.arcade.enableBody(this);
 	//this.body.gravity.y = 1000;
 	this.game.add.existing(this);
