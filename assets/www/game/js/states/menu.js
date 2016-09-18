@@ -33,27 +33,11 @@ Menu.prototype = {
 		// start gyroscope detection
 //		gyro.startTracking(function(o){});
 	    
-	    this.game.input.onDown.add(this.ship.jump, this.ship);
+//	    this.game.input.onDown.add(this.ship.jump, this.ship);
 	    
 	    console.log("menu state");
 	},
 	update: function(){
-		var gX = gyro.getOrientation().x;
-		var gY = gyro.getOrientation().y;
-
-		this.gyroText.text =  "x: "+gX +"\ny: "+gY;
-		
-		if(Math.abs(gX) >=1){
-			this.ship.body.velocity.x -= gX;
-		}
-		if(Math.abs(gY) >=1){
-			this.ship.body.velocity.y += gY;
-		}
-		
-		if(Math.abs(gX) <=1 && Math.abs(gY) <=1){
-			this.ship.body.velocity.x = 0;
-			this.ship.body.velocity.y = 0;
-		}
 		
 		starfield.tilePosition.x -= 1;
 	},
