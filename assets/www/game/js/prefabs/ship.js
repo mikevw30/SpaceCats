@@ -20,23 +20,17 @@ Ship.prototype.update = function() {
 	var gX = gyro.getOrientation().x;
 	var gY = gyro.getOrientation().y;
 
-//	this.gyroText.text =  "x: "+gX +"\ny: "+gY;
-	
 	if(Math.abs(gX) >=1){
-		this.ship.body.velocity.x -= gX;
+		this.body.velocity.x -= gX;
 	}
 	if(Math.abs(gY) >=1){
-		this.ship.body.velocity.y += gY;
+		this.body.velocity.y += gY;
 	}
 	
 	if(Math.abs(gX) <=1 && Math.abs(gY) <=1){
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;
 	}
-	
-//    if (this.angle < 20){
-//        this.angle += 1; 
-//    }
 };
 
 Ship.prototype.jump = function() {
