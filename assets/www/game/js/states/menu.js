@@ -26,30 +26,28 @@ Menu.prototype = {
 //	    this.ship = new Ship(this.game, (width/2)-16, -20);
 	    this.ship = new Ship(this.game, (width/2)-16, height/2);
 	    
-	    
-	    var gX = 0;
-	    var gY= 0;
-	    
 	    var gyroTextStyle = { font: "10px Arial", fill: "#e6e6e6", align: "center" };
-	    var gyroText = game.add.text(10, 10, "gamma: "+gX +"\nbeta: "+gY, gyroTextStyle);
+	    this.gyroText = game.add.text(10, 10, "x: "+gyro.getOrientation().x  +"\ny: "+gyro.getOrientation().y, gyroTextStyle);
 
 	    gyro.frequency = 10;
 		// start gyroscope detection
 		gyro.startTracking(function(o) {
 		     // updating player velocity
-			gX = o.x;
-			alert("o.x: "+o.x);
-			gY = o.y;
+//			gX = o.x;
+//			("o.x: "+o.x);
+//			gY = o.y;
 			
 		});
-		this.ship.body.velocity.x += gX;
-		this.ship.body.velocity.y += gY;
 	    
 	    this.game.input.onDown.add(this.ship.jump, this.ship);
 	    
 	    console.log("menu state");
 	},
 	update: function(){
+		this.gyroText.text =  "x: "+gyro.getOrientation().x +"\ny: "+gyro.getOrientation().y;
+		this.ship.body.velocity.x += gyro.getOrientation().x;
+		this.ship.body.velocity.y += gyro.getOrientation().y;
+		
 		starfield.tilePosition.x -= 1;
 		if(this.ship.body.y > game.world.centerY+game.world.centerY/2){
 			this.ship.jump();
