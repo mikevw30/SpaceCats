@@ -3,6 +3,7 @@ function Boot(game) {}
 
 Boot.prototype = {
   init: function(){
+	  this.scale.forceOrientation(true, false);
   },
   preload: function() {
       this.game.load.image("loading","game/assets/loading.png");

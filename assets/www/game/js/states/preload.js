@@ -1,5 +1,6 @@
 var Preload = function(game){
 	 this.ready = false;
+	 this.loadingBar = null;
 };
 
 Preload.prototype = {
@@ -9,9 +10,9 @@ Preload.prototype = {
 		this.game.forceSingleUpdate = true;
 	},
 	preload: function(){ 
-		var loadingBar = this.add.sprite(game.world.centerX,game.world.centerY,"loading");
-		loadingBar.anchor.setTo(0.5);
-		this.load.setPreloadSprite(loadingBar,0);
+		this.loadingBar = this.add.sprite(game.world.centerX,game.world.centerY,"loading");
+		this.loadingBar.anchor.setTo(0.5);
+		this.load.setPreloadSprite(this.loadingBar,0);
 		
 		this.loadData();
 		this.onLoadComplete();

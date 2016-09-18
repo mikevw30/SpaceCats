@@ -23,7 +23,26 @@ Menu.prototype = {
 	    var tapText = game.add.text(game.world.centerX, game.world.centerY+game.world.centerY/2, "Tap to make the ship jump\n?????\nProfit!", style);
 	    tapText.anchor.set(0.5);
 		
-	    this.ship = new Ship(this.game, (width/2)-16, -20);
+//	    this.ship = new Ship(this.game, (width/2)-16, -20);
+	    this.ship = new Ship(this.game, (width/2)-16, height/2);
+	    
+	    
+	    var gGamma = 0;
+	    var gBeta = 0;
+	    
+	    var gyroTextStyle = { font: "10px Arial", fill: "#e6e6e6", align: "center" };
+	    var gyroText = game.add.text(10, 10, "gamma: "+gGamma +"\nbeta: "+gBeta, gyroTextStyle);
+
+	    gyro.frequency = 10;
+		// start gyroscope detection
+		gyro.startTracking(function(o) {
+		     // updating player velocity
+			gammaText = o.gamma;
+			betaText = o.beta;
+			
+		});
+		this.ship.body.velocity.x += gGamma/20;
+		this.ship.body.velocity.y += gBeta/20;
 	    
 	    this.game.input.onDown.add(this.ship.jump, this.ship);
 	    
