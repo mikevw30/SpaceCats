@@ -9,6 +9,7 @@ var Ship = function(game, x, y, frame) {
 	//this.body.gravity.y = 1000;
 	this.game.add.existing(this);
 	this.body.immovable = true;
+	this.body.collideWorldBounds = true;
 };
 
 Ship.prototype = Object.create(Phaser.Sprite.prototype);  
