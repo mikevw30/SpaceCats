@@ -47,8 +47,14 @@ Menu.prototype = {
 			this.ship.body.velocity.x -= gX;
 		}
 		if(Math.abs(gY) >=1){
-			this.ship.body.velocity.y -= gY;
+			this.ship.body.velocity.y += gY;
 		}
+		
+		if(Math.abs(gX) <=1 && Math.abs(gY) <=1){
+			this.ship.body.velocity.x = 0;
+			this.ship.body.velocity.y = 0;
+		}
+		
 		starfield.tilePosition.x -= 1;
 	},
 	playTheGame: function(){
