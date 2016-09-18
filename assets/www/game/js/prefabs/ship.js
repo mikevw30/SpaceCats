@@ -23,12 +23,13 @@ Ship.prototype.update = function() {
 	if(Math.abs(gX) >=1){
 		this.body.velocity.x -= gX;
 	}
+	else{
+		this.body.velocity.x = 0;
+	}
 	if(Math.abs(gY) >=1){
 		this.body.velocity.y += gY;
 	}
-	
-	if(Math.abs(gX) <=1 && Math.abs(gY) <=1){
-		this.body.velocity.x = 0;
+	else{
 		this.body.velocity.y = 0;
 	}
 };
