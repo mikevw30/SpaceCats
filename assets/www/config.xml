@@ -3,7 +3,8 @@
   <description>SpaceCats is a infinity shooter written in PhaserJS and ported to Andriod using Cordova.</description>
   <content src="index.html"/>
   
-  <preference name="orientation" value="portrate"/>
+  <preference name="orientation" value="portrait" />
+  
   <preference name="target-device" value="universal"/>
   <preference name="fullscreen" value="true"/>
   <preference name="webviewbounce" value="true"/>
