@@ -27,22 +27,23 @@ Menu.prototype = {
 	    this.ship = new Ship(this.game, (width/2)-16, height/2);
 	    
 	    
-	    var gGamma = 0;
-	    var gBeta = 0;
+	    var gX = 0;
+	    var gY= 0;
 	    
 	    var gyroTextStyle = { font: "10px Arial", fill: "#e6e6e6", align: "center" };
-	    var gyroText = game.add.text(10, 10, "gamma: "+gGamma +"\nbeta: "+gBeta, gyroTextStyle);
+	    var gyroText = game.add.text(10, 10, "gamma: "+gX +"\nbeta: "+gY, gyroTextStyle);
 
 	    gyro.frequency = 10;
 		// start gyroscope detection
 		gyro.startTracking(function(o) {
 		     // updating player velocity
-			gammaText = o.gamma;
-			betaText = o.beta;
+			gX = o.x;
+			alert("o.x: "+o.x);
+			gY = o.y;
 			
 		});
-		this.ship.body.velocity.x += gGamma/20;
-		this.ship.body.velocity.y += gBeta/20;
+		this.ship.body.velocity.x += gX;
+		this.ship.body.velocity.y += gY;
 	    
 	    this.game.input.onDown.add(this.ship.jump, this.ship);
 	    
