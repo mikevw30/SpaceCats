@@ -12,6 +12,11 @@
     android:smallScreens="true" 
     android:resizeable="true" 
     android:anyDensity="true" />
+    
+    <uses-feature android:name="android.hardware.screen.portrait" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
+    
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
