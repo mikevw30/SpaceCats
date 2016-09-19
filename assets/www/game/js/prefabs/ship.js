@@ -21,19 +21,19 @@ Ship.prototype.update = function() {
 	var gY = gyro.getOrientation().y;
 
 	var accFilter = 0.1;
-	var shipSpeed = 150;
+	var maxShipSpeed = 150;
 	
 	if(Math.abs(gX) >= accFilter){
-		if(Math.abs(this.body.velocity.x) < shipSpeed){
-			this.body.velocity.x += 20;
+		if(Math.abs(this.body.velocity.x) < maxShipSpeed){
+			this.body.velocity.x += gX*20;
 		}
 	}
 	else{
 		this.body.velocity.x = 0;
 	}
 	if(Math.abs(gY) >= accFilter){
-		if(Math.abs(this.body.velocity.y) < shipSpeed){
-			this.body.velocity.y += 10;
+		if(Math.abs(this.body.velocity.y) < maxShipSpeed){
+			this.body.velocity.y += gY*20;
 		}
 	}
 	else{
