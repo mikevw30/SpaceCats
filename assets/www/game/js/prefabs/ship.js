@@ -24,7 +24,7 @@ Ship.prototype.update = function() {
 	var shipSpeed = 150;
 	
 	if(Math.abs(gX) >= accFilter){
-		if(Math.abs(this.body.velocity.x) > shipSpeed){
+		if(Math.abs(this.body.velocity.x) < shipSpeed){
 			this.body.velocity.x += gX;
 		}
 	}
@@ -32,13 +32,15 @@ Ship.prototype.update = function() {
 		this.body.velocity.x = 0;
 	}
 	if(Math.abs(gY) >= accFilter){
-		if(Math.abs(this.body.velocity.y) > shipSpeed){
+		if(Math.abs(this.body.velocity.y) < shipSpeed){
 			this.body.velocity.y += gY;
 		}
 	}
 	else{
 		this.body.velocity.y = 0;
 	}
+	console.log("x: "+x+" y: "+y);
+	
 };
 
 Ship.prototype.jump = function() {};
