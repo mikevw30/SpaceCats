@@ -17,34 +17,15 @@ Ship.prototype.constructor = Ship;
 
 Ship.prototype.update = function() {
 	
-//	var gX = gyro.getOrientation().x;
-//	var gY = gyro.getOrientation().y;
-	
-	var xMotion = [0,0,0,0,0,0,0,0,0,0];
-	var yMotion = [0,0,0,0,0,0,0,0,0,0];
-	
-	
-	for(var i =0;i<9;i++){
-		xMotion[i]=gyro.getOrientation().x;
-		yMotion[i]=gyro.getOrientation().y;
-	}
-	
-	var gX = 0;
-	var gY = 0;
-	
-	for(var i =0;i<9;i++){
-		gX += xMotion[i];
-		gY += yMotion[i];
-	}
+	var gX = gyro.getOrientation().x;
+	var gY = gyro.getOrientation().y;
 
 	var accFilter = 0.1;
-	var maxShipSpeed = 150;
+	var shipSpeed = 150;
 	
 	if(Math.abs(gX) >= accFilter){
 		if(gX < 0){
-			if(this.body.velocity.x <= maxShipSpeed){
-				this.body.velocity.x -= gX;
-			}
+			this.body.velocity.x = -shipSpeed;
 		}
 		else{
 			this.body.velocity.x = shipSpeed;
@@ -60,7 +41,6 @@ Ship.prototype.update = function() {
 		else{
 			this.body.velocity.y = -shipSpeed;
 		}
-//		this.body.velocity.y += gY;
 	}
 	else{
 		this.body.velocity.y = 0;
