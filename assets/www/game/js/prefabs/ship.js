@@ -20,7 +20,7 @@ Ship.prototype.update = function() {
 	var gX = gyro.getOrientation().x;
 	var gY = gyro.getOrientation().y;
 
-	var accFilter = 0.01;
+	var accFilter = 0.001;
 	
 	if(Math.abs(gX) >= accFilter){
 		this.body.velocity.x -= gX;
