@@ -10,7 +10,9 @@ var Play = function(game){
 Play.prototype = {
 	create: function() { 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
-		starfield = game.add.tileSprite(0, 0, width, height, "stars");
+		
+		this.starField = new StarField(game, 0, 0, width, height);
+  		this.game.add.existing(this.starField);
 
         this.ship = new Ship(this.game, 100, 245);
         
@@ -26,8 +28,6 @@ Play.prototype = {
     },
 
     update: function() {
-    	starfield.tilePosition.x -= 1;
-    	
         if (this.ship.y < 0 || this.ship.y > height){
         	this.endGame();
         }    	

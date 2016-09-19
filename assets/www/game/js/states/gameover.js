@@ -8,7 +8,8 @@ gameOver.prototype = {
 //	init: function(score){
 //	},
   	create: function(){
-  		starfield = game.add.tileSprite(0, 0, width, height, "stars");
+  		this.starfield = new StarField(game, 0, 0, width, height);
+  		game.add.existing(this.starfield);
   		
   		var style = { font: "50px Arial", fill: "#e6e6e6", align: "center" };
   		var gameOverText = game.add.text(game.world.centerX, game.world.centerY, "Your Score: "+score+"\nPlay Again", style);
@@ -17,7 +18,6 @@ gameOver.prototype = {
   		gameOverText.anchor.set(0.5);
 	},
 	update: function(){
-		starfield.tilePosition.x -= 1;
 	},
 	playTheGame: function(){
 		this.game.state.start("Play");

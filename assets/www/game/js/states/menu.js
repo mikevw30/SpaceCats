@@ -2,12 +2,13 @@ var Menu = function(game){
 	this.height = window.innerHeight;
 	this.width = window.innerWidth;
 	this.ship = null;
-	this.starfield;
+	this.statField;
 };
 
 Menu.prototype = {
   	create: function(){
-  		starfield = game.add.tileSprite(0, 0, width, height, "stars");
+  		this.starfield = new StarField(game, 0, 0, width, height);
+  		this.game.add.existing(this.starfield);
 
   		var style = { font: "65px Arial", fill: "#e6e6e6", align: "center" };
   		
@@ -23,7 +24,6 @@ Menu.prototype = {
 	    var tapText = game.add.text(game.world.centerX, game.world.centerY+game.world.centerY/2, "Tap to make the ship jump\n?????\nProfit!", style);
 	    tapText.anchor.set(0.5);
 		
-//	    this.ship = new Ship(this.game, (width/2)-16, -20);
 	    this.ship = new Ship(this.game, (width/2)-16, height/2);
 	    
 	    var gyroTextStyle = { font: "10px Arial", fill: "#e6e6e6", align: "center" };
@@ -38,8 +38,6 @@ Menu.prototype = {
 	    console.log("menu state");
 	},
 	update: function(){
-		this.ship.update();
-		starfield.tilePosition.x -= 1;
 	},
 	playTheGame: function(){
 		this.game.state.start("Play");

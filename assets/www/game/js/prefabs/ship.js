@@ -34,7 +34,4 @@ Ship.prototype.update = function() {
 	}
 };
 
-Ship.prototype.jump = function() {
-//	this.body.velocity.y = -350;
-//	this.game.add.tween(this).to({angle: -20}, 100).start(); 
-};
+Ship.prototype.jump = function() {};
