@@ -24,10 +24,10 @@ Ship.prototype.update = function() {
 	
 	if(Math.abs(gX) >= accFilter){
 		if(gX < 0){
-		this.body.velocity.x = 20;
+		this.body.velocity.x = -200;
 		}
 		else{
-		this.body.velocity.x = -20;
+		this.body.velocity.x = 200;
 		}
 	}
 	else{
@@ -35,10 +35,10 @@ Ship.prototype.update = function() {
 	}
 	if(Math.abs(gY) >= accFilter){
 		if(gX < 0){
-			this.body.velocity.y = 20;
+			this.body.velocity.y = 200;
 		}
 		else{
-			this.body.velocity.y = -20;
+			this.body.velocity.y = -200;
 		}
 //		this.body.velocity.y += gY;
 	}
