@@ -20,21 +20,21 @@ Ship.prototype.update = function() {
 	var gX = gyro.getOrientation().x;
 	var gY = gyro.getOrientation().y;
 
-	var accFilter = 0.001;
+	var accFilter = 0.0001;
 	
 	if(Math.abs(gX) >= accFilter){
 		if(gX < 0){
-		this.body.velocity.x = -200;
+			this.body.velocity.x = -200;
 		}
 		else{
-		this.body.velocity.x = 200;
+			this.body.velocity.x = 200;
 		}
 	}
 	else{
 		this.body.velocity.x = 0;
 	}
 	if(Math.abs(gY) >= accFilter){
-		if(gX < 0){
+		if(gY < 0){
 			this.body.velocity.y = 200;
 		}
 		else{
