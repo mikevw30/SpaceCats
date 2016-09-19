@@ -39,7 +39,7 @@ Ship.prototype.update = function() {
 	else{
 		this.body.velocity.y = 0;
 	}
-	console.log("x: "+x+" y: "+y);
+	console.log("x: "+this.body.velocity.x+" y: "+this.body.velocity.y);
 	
 };
 
