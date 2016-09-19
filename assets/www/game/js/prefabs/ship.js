@@ -17,14 +17,14 @@ Ship.prototype.constructor = Ship;
 
 Ship.prototype.update = function() {
 	
-	var gX = gyro.getOrientation().x;
-	var gY = gyro.getOrientation().y;
+//	var gX = gyro.getOrientation().x;
+//	var gY = gyro.getOrientation().y;
 	
 	var xMotion = [0,0,0,0,0,0,0,0,0,0];
 	var yMotion = [0,0,0,0,0,0,0,0,0,0];
 	
 	
-	for(var i =0;i<10;i++){
+	for(var i =0;i<9;i++){
 		xMotion[i]=gyro.getOrientation().x;
 		yMotion[i]=gyro.getOrientation().y;
 	}
@@ -32,7 +32,7 @@ Ship.prototype.update = function() {
 	var gX = 0;
 	var gY = 0;
 	
-	for(var i =0;i<10;i++){
+	for(var i =0;i<9;i++){
 		gX += xMotion[i];
 		gY += yMotion[i];
 	}
