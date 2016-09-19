@@ -20,14 +20,15 @@ Ship.prototype.update = function() {
 	var gX = gyro.getOrientation().x;
 	var gY = gyro.getOrientation().y;
 
-	var accFilter = 0.0001;
+	var accFilter = 1;
+	var shipSpeed = 150;
 	
 	if(Math.abs(gX) >= accFilter){
 		if(gX < 0){
-			this.body.velocity.x = -200;
+			this.body.velocity.x = -shipSpeed;
 		}
 		else{
-			this.body.velocity.x = 200;
+			this.body.velocity.x = shipSpeed;
 		}
 	}
 	else{
@@ -35,10 +36,10 @@ Ship.prototype.update = function() {
 	}
 	if(Math.abs(gY) >= accFilter){
 		if(gY < 0){
-			this.body.velocity.y = 200;
+			this.body.velocity.y = shipSpeed;
 		}
 		else{
-			this.body.velocity.y = -200;
+			this.body.velocity.y = -shipSpeed;
 		}
 //		this.body.velocity.y += gY;
 	}
