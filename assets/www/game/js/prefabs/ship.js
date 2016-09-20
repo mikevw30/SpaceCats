@@ -25,9 +25,9 @@ Ship.prototype.update = function() {
 	if(Math.abs(gX) >= accFilter){
 		if(Math.abs(this.body.velocity.x) < maxShipSpeed){
 			if(gX<0)
-				this.body.velocity.x += 15;
+				this.body.velocity.x += 5;
 			else
-				this.body.velocity.x -= 15;
+				this.body.velocity.x -= 5;
 		}
 	}
 	else{
@@ -36,9 +36,9 @@ Ship.prototype.update = function() {
 	if(Math.abs(gY) >= accFilter){
 		if(Math.abs(this.body.velocity.y) < maxShipSpeed){
 			if(gY<0)
-				this.body.velocity.y -= 15;
+				this.body.velocity.y -= 5;
 			else
-				this.body.velocity.y += 15;
+				this.body.velocity.y += 5;
 		}
 	}
 	else{
