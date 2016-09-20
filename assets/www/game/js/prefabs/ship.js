@@ -3,7 +3,6 @@
 var Ship = function(game, x, y, frame) {  
 	Phaser.Sprite.call(this, game, x, y, 'ship', frame);
 	this.name = 'ship';
-  
 	this.anchor.setTo(0.5);
 	this.game.physics.arcade.enableBody(this);
 	//this.body.gravity.y = 1000;
@@ -45,8 +44,6 @@ Ship.prototype.update = function() {
 	else{
 		this.body.velocity.y = 0;
 	}
-	console.log("x: "+this.body.velocity.x+" y: "+this.body.velocity.y);
-	
 };
 
 Ship.prototype.jump = function() {};

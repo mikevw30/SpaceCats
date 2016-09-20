@@ -54,9 +54,9 @@ Play.prototype = {
     	if(!pipeGroup) {
     		pipeGroup = new AlienGroup(this.game, this.aliens);  
     	}
-    	var starGroup = this.stars.getFirstExists(false);
-    	if(!starGroup) {
-    		starGroup = new StarGroup(this.game, this.stars);  
-    	}
+//    	var starGroup = this.stars.getFirstExists(false);
+//    	if(!starGroup) {
+//    		starGroup = new StarGroup(this.game, this.stars);  
+//    	}
     }
 };
