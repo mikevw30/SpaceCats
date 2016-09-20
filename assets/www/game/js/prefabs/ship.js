@@ -16,8 +16,8 @@ Ship.prototype.constructor = Ship;
 
 Ship.prototype.update = function() {
 	
-	var gX = gyro.getOrientation().x;
-	var gY = gyro.getOrientation().y;
+	var gX = (gyro.getOrientation().x + gyro.getOrientation().x + gyro.getOrientation().x) / 3;
+	var gY = (gyro.getOrientation().y + gyro.getOrientation().y + gyro.getOrientation().y) / 3;
 
 	var accFilter = 1;
 	var maxShipSpeed = 150;
