@@ -21,7 +21,7 @@ Play.prototype = {
 
         this.aliens = this.game.add.group();
         this.stars = this.game.add.group();
-        this.starEmitter = this.game.add.emitter(0, 0, 100);
+        this.starEmitter = this.game.add.emitter(0, 0);
         this.starEmitter.makeParticles('star');
         
         score = 0;
@@ -46,16 +46,11 @@ Play.prototype = {
     },
     
     hitEnemy: function(_bullet, _enemy) {
-    	
     	_bullet.kill();
     	_enemy.kill();
-    	
     	this.starEmitter.x = _enemy.x;
     	this.starEmitter.y = _enemy.y;
-    	this.starEmitter.start(true, null, 3);
-    	
-//    	score++;
-//    	this.labelScore.text = score;
+    	this.starEmitter.start(true, 2000, null, 10);
     },
     
     endGame: function() {
