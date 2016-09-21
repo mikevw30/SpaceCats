@@ -41,8 +41,9 @@ Play.prototype = {
     },
     
     hitEnemy: function(_bullet, _enemy) {
-    	console.log("hit");
+    	_bullet.kill();
     	_enemy.kill();
+    	score++;
     },
     
     endGame: function() {

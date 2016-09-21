@@ -12,7 +12,7 @@ var Ship = function(game, x, y, frame) {
 	this.angle -=90;
 	this.scale.setTo(2,2);
 	
-	this.body.maxVelocity.set(150);
+	this.body.maxVelocity.set(200);
 	
 	
 	
@@ -46,26 +46,21 @@ Ship.prototype.update = function() {
 	var gY = (gyro.getOrientation().y + gyro.getOrientation().y + gyro.getOrientation().y) / 3;
 
 	var accFilter = 1;
-//	var maxShipSpeed = 150;
 	
 	if(Math.abs(gX) >= accFilter){
-//		if(Math.abs(this.body.velocity.x) < maxShipSpeed){
-			if(gX<0)
-				this.body.velocity.x += 10;
-			else
-				this.body.velocity.x -= 10;
-//		}
+		if(gX<0)
+			this.body.velocity.x += 15;
+		else
+			this.body.velocity.x -= 15;
 	}
 	else{
 		this.body.velocity.x = 0;
 	}
 	if(Math.abs(gY) >= accFilter){
-//		if(Math.abs(this.body.velocity.y) < maxShipSpeed){
-			if(gY<0)
-				this.body.velocity.y -= 10;
-			else
-				this.body.velocity.y += 10;
-//		}
+		if(gY<0)
+			this.body.velocity.y -= 15;
+		else
+			this.body.velocity.y += 15;
 	}
 	else{
 		this.body.velocity.y = 0;
