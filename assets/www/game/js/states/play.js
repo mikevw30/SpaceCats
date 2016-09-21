@@ -21,7 +21,7 @@ Play.prototype = {
 
         this.aliens = this.game.add.group();
         this.stars = this.game.add.group();
-        this.starEmitter = this.game.add.emitter(0, 0,100);
+        this.starEmitter = this.game.add.emitter(0, 0,4);
         this.starEmitter.makeParticles('star');
         
         score = 0;
