@@ -15,7 +15,7 @@ Play.prototype = {
 		this.starField = new StarField(game, 0, 0, width, height);
   		this.game.add.existing(this.starField);
 
-        this.ship = new Ship(this.game, 100, 245);
+        this.ship = new Ship(this.game, game.world.centerX, game.world.centerY);
         
         this.game.input.onDown.add(this.ship.jump, this.ship);
 
@@ -50,7 +50,7 @@ Play.prototype = {
     	_enemy.kill();
     	this.starEmitter.x = _enemy.x;
     	this.starEmitter.y = _enemy.y;
-    	this.starEmitter.start(true, 2000, null, 10);
+    	this.starEmitter.start(true, 0, null, 10);
     },
     
     endGame: function() {
