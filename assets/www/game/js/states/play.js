@@ -5,6 +5,7 @@ var Play = function(game){
 	higher = true;
 	score = 0;
 	this.starfield;
+	this.starEmitter;
 };
 
 Play.prototype = {
@@ -20,6 +21,8 @@ Play.prototype = {
 
         this.aliens = this.game.add.group();
         this.stars = this.game.add.group();
+        this.starEmitter = this.game.add.emitter(0, 0, 100);
+        this.starEmitter.makeParticles('star');
         
         score = 0;
         this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
@@ -35,15 +38,24 @@ Play.prototype = {
         	this.game.physics.arcade.overlap(this.ship.weapon.bullets, pipeGroup, this.hitEnemy, null, this);
             this.game.physics.arcade.overlap(this.ship, pipeGroup, this.endGame, null, this);
         }, this);
-        this.stars.forEach(function(starGroup) {
-        	this.game.physics.arcade.overlap(this.ship, starGroup, this.collectStar, null, this);
-        }, this);
+        this.game.physics.arcade.collide(this.ship, this.starEmitter, this.collectStar, null, this);
+//        this.stars.forEach(function(starGroup) {
+//        	this.game.physics.arcade.overlap(this.ship, starGroup, this.collectStar, null, this);
+//        }, this);
+        
     },
     
     hitEnemy: function(_bullet, _enemy) {
+    	
     	_bullet.kill();
     	_enemy.kill();
-    	score++;
+    	
+    	this.starEmitter.x = _enemy.x;
+    	this.starEmitter.y = _enemy.y;
+    	this.starEmitter.start(true, null, 3);
+    	
+//    	score++;
+//    	this.labelScore.text = score;
     },
     
     endGame: function() {
