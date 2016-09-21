@@ -32,11 +32,17 @@ Play.prototype = {
         	this.endGame();
         }    	
         this.aliens.forEach(function(pipeGroup) {
+        	this.game.physics.arcade.overlap(this.ship.weapon.bullets, pipeGroup, this.hitEnemy, null, this);
             this.game.physics.arcade.overlap(this.ship, pipeGroup, this.endGame, null, this);
         }, this);
         this.stars.forEach(function(starGroup) {
         	this.game.physics.arcade.overlap(this.ship, starGroup, this.collectStar, null, this);
         }, this);
+    },
+    
+    hitEnemy: function(_bullet, _enemy) {
+    	console.log("hit");
+    	_enemy.kill();
     },
     
     endGame: function() {
