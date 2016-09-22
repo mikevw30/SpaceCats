@@ -67,7 +67,7 @@ Play.prototype = {
     	_enemy.kill();
     	this.starEmitter.x = _enemy.x;
     	this.starEmitter.y = _enemy.y;
-    	this.starEmitter.start(true, 10000, null, 10);
+    	this.starEmitter.start(true, 10000, null, 2);
     },
     
     endGame: function() {
