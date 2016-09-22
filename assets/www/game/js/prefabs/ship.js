@@ -15,9 +15,9 @@ var Ship = function(game, x, y, frame) {
 	
 	this.scale.setTo(2,2);
 	
-	this.weapon = game.add.weapon(25,'aquaball');
+	this.weapon = game.add.weapon(20,'aquaball');
 	this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-    this.weapon.fireRate = 200;
+    this.weapon.fireRate = 300;
     this.weapon.trackSprite(this, this.body.width, 0, true);
 };
 

@@ -42,6 +42,7 @@ Preload.prototype = {
 
 		//bullets
 		this.game.load.image("aquaball","game/assets/aqua_ball.png");
+		this.game.load.image("redball","game/assets/red_ball.png");
         
         // Set the physics system
         this.game.physics.startSystem(Phaser.Physics.ARCADE);

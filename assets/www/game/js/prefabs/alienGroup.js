@@ -18,12 +18,11 @@ var AlienGroup = function(game, parent) {
   for(var i = 0;i<2;i++){
 	  this.add(new Alien(game, arr[i]*(16*3)-(16*3)/2, 0));   
   }
-
-  this.setAll('body.velocity.y', 200);
 };
 
 AlienGroup.prototype = Object.create(Phaser.Group.prototype);
 AlienGroup.prototype.constructor = AlienGroup;
 
 AlienGroup.prototype.update = function() {
+	Phaser.Group.prototype.update.apply(this, arguments);
 };

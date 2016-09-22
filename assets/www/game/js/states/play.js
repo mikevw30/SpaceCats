@@ -6,81 +6,66 @@ var Play = function(game){
 	score = 0;
 	this.starfield;
 	this.starEmitter;
+	ship = null;
+	this.debug = false;
 };
 
 Play.prototype = {
 	preload: function() {
-		this.game.time.advancedTiming = true;
+		if(this.debug)
+			this.game.time.advancedTiming = true;
 	},
 	create: function() { 
+		//background
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
-		
 		this.starField = new StarField(game, 0, 0, width, height);
   		this.game.add.existing(this.starField);
 
-        this.ship = new Ship(this.game, game.world.centerX, game.world.centerY);
-        
-        this.game.input.onDown.add(this.ship.jump, this.ship);
+  		//player ship as global variable.
+        ship = new Ship(this.game, game.world.centerX, game.world.centerY);
 
+        //groups
         this.aliens = this.game.add.group();
-        
-//        this.aliens.addChild(new AlienGroup(this.game, this));
-        
-//        var temp = new  AlienGroup(this.game, this.aliens);
-        
-        
-        
-        
         this.stars = this.game.add.group();
-        this.starEmitter = this.game.add.emitter();
-//        						      (keys, frames, quantity, collide, collideWorldBounds);
-        this.starEmitter.makeParticles('star',null,30,true,false);
         
+        //star spawner on enemy kill
+        this.starEmitter = this.game.add.emitter();
+        this.starEmitter.makeParticles('star',null,30,true,false);
         this.starEmitter.checkWorldBounds = true;
         this.starEmitter.outOfBoundsKill = true;
-        
         this.starEmitter.gravity.x = 0;
         this.starEmitter.gravity.y = 10;
-        
         this.starEmitter.minParticleSpeed.set(-5, 50);
         this.starEmitter.maxParticleSpeed.set(5, 100);
         
         score = 0;
         this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
-//        this.info = this.game.add.text(game.world.centerX, 20, "info",{ font: "30px Arial", fill: "#ffffff" }); 
         
         this.timer = this.game.time.events.loop(1500, this.addRow, this);
     },
 
     update: function() {
-        if (this.ship.y < 0 || this.ship.y > height){
+        if (ship.y < 0 || ship.y > height){
         	this.endGame();
         }    	
-        this.aliens.forEach(function(pipeGroup) {
+        this.aliens.forEach(function(alienGroup) {
         	var remove = true;
-        	
-        	pipeGroup.forEach(function(a){
+        	alienGroup.forEach(function(a){
+        		this.game.physics.arcade.overlap(ship, a.weapon.bullets, this.endGame, null, this);
         		if(a.alive){
         			remove = false;
         		}
         	}, this);
-        	
+        	//remove 
         	if(remove){
-        		this.aliens.remove(pipeGroup);
+        		this.aliens.remove(alienGroup);
         	}
         	else{
-        		this.game.physics.arcade.overlap(this.ship.weapon.bullets, pipeGroup, this.hitEnemy, null, this);
-        		this.game.physics.arcade.overlap(this.ship, pipeGroup, this.endGame, null, this);
+        		this.game.physics.arcade.overlap(ship, alienGroup, this.endGame, null, this);
+        		this.game.physics.arcade.overlap(ship.weapon.bullets, alienGroup, this.hitEnemy, null, this);
         	}
         }, this);
-        this.game.physics.arcade.overlap(this.ship, this.starEmitter, this.collectStar, null, this);
-//        this.stars.forEach(function(starGroup) {
-//        	this.game.physics.arcade.overlap(this.ship, starGroup, this.collectStar, null, this);
-//        }, this);
-//        this.info.text = "stars: "+this.starEmitter.countLiving() +
-//        				 "fps: "+this.game.fps +
-//        				 "\nenemy: "+this.aliens.countLiving();
-        
+        this.game.physics.arcade.overlap(ship, this.starEmitter, this.collectStar, null, this);
     },
     
     hitEnemy: function(_bullet, _enemy) {
@@ -102,16 +87,17 @@ Play.prototype = {
     },
     
     addRow: function() {
-    	var pipeGroup = this.aliens.getFirstExists(false);
-    	if(!pipeGroup) {
-    		pipeGroup = new AlienGroup(this.game, this.aliens);  
+    	var alienGroup = this.aliens.getFirstExists(false);
+    	if(!alienGroup) {
+    		alienGroup = new AlienGroup(this.game, this.aliens);  
     	}
     },
     render: function() {
-        this.ship.weapon.debug(30,this.game.world.height-30);
-        this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
-        this.game.debug.text('this.aliens.countLiving: ' + (this.aliens.countLiving()), 30,this.game.world.height-85);
-        this.game.debug.text('this.aliens.countDead: ' + (this.aliens.countDead()), 30,this.game.world.height-70);
-        this.game.debug.text('this.aliens.length: ' + (this.aliens.length), 30,this.game.world.height-55);
+    	if(this.debug){
+	        ship.weapon.debug(30,this.game.world.height-55);
+	        this.game.debug.text('Debug Info', 30,this.game.world.height-115);
+	        this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
+	        this.game.debug.text('this.aliens.aliveWaveCount: ' + (this.aliens.countLiving()), 30,this.game.world.height-85);
+    	}
     }
 };
