@@ -26,15 +26,6 @@ Menu.prototype = {
 		
 	    this.ship = new Ship(this.game, (width/2)-16, height/2);
 	    
-	    var gyroTextStyle = { font: "10px Arial", fill: "#e6e6e6", align: "center" };
-	    this.gyroText = game.add.text(10, 10, "x: "+gyro.getOrientation().x  +"\ny: "+gyro.getOrientation().y, gyroTextStyle);
-
-//	    gyro.frequency = 10;
-		// start gyroscope detection
-//		gyro.startTracking(function(o){});
-	    
-//	    this.game.input.onDown.add(this.ship.jump, this.ship);
-	    
 	    console.log("menu state");
 	},
 	update: function(){
