@@ -7,7 +7,7 @@ var Play = function(game){
 	this.starfield;
 	this.starEmitter;
 	ship = null;
-	this.debug = false;
+	this.debug = true;
 };
 
 Play.prototype = {

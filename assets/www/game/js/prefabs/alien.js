@@ -13,7 +13,7 @@ var Alien = function(game, x, y, frame) {
   this.body.velocity.y = 150;
   this.body.allowGravity = false;
   
-  this.weapon = game.add.weapon(30,'redball');
+  this.weapon = game.add.weapon(2,'redball');
   this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
   this.weapon.fireRate = 2000;
   this.weapon.trackSprite(this, this.body.width, 0, true);
