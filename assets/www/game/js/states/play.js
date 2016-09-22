@@ -21,8 +21,14 @@ Play.prototype = {
 
         this.aliens = this.game.add.group();
         this.stars = this.game.add.group();
-        this.starEmitter = this.game.add.emitter(0, 0,50);
-        this.starEmitter.makeParticles('star');
+        this.starEmitter = this.game.add.emitter();
+//        						      (keys, frames, quantity, collide, collideWorldBounds);
+        this.starEmitter.makeParticles('star',null,50,true,false);
+        
+        this.starEmitter.gravity.x = 0;
+        this.starEmitter.gravity.y = 10;
+        
+        this.starEmitter.maxParticleSpeed.set(0, 100);
         
         score = 0;
         this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
