@@ -9,6 +9,9 @@ var Play = function(game){
 };
 
 Play.prototype = {
+	preload: function() {
+		this.game.time.advancedTiming = true;
+	},
 	create: function() { 
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 		
@@ -35,8 +38,8 @@ Play.prototype = {
         this.starEmitter.maxParticleSpeed.set(5, 100);
         
         score = 0;
-        this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
-        this.info = this.game.add.text(game.world.centerX, 20, "info",{ font: "30px Arial", fill: "#ffffff" }); 
+//        this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
+//        this.info = this.game.add.text(game.world.centerX, 20, "info",{ font: "30px Arial", fill: "#ffffff" }); 
         
         this.timer = this.game.time.events.loop(1500, this.addRow, this);
     },
@@ -53,8 +56,9 @@ Play.prototype = {
 //        this.stars.forEach(function(starGroup) {
 //        	this.game.physics.arcade.overlap(this.ship, starGroup, this.collectStar, null, this);
 //        }, this);
-        this.info.text = "stars: "+this.starEmitter.countLiving() +
-        				 "enemy: "+this.aliens.countLiving();
+//        this.info.text = "stars: "+this.starEmitter.countLiving() +
+//        				 "fps: "+this.game.fps +
+//        				 "\nenemy: "+this.aliens.countLiving();
         
     },
     
@@ -73,7 +77,7 @@ Play.prototype = {
     collectStar: function(_ship,_star) {
     	_star.kill();
         score += 1;
-        this.labelScore.text = score;
+//        this.labelScore.text = score;
     },
     
     addRow: function() {

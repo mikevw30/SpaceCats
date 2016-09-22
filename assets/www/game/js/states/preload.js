@@ -16,6 +16,7 @@ Preload.prototype = {
 		
 		this.loadData();
 		this.onLoadComplete();
+		
 	},
     create: function() {
     	console.log("Preload state start");
