@@ -38,7 +38,7 @@ Play.prototype = {
         this.starEmitter.maxParticleSpeed.set(5, 100);
         
         score = 0;
-//        this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
+        this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
 //        this.info = this.game.add.text(game.world.centerX, 20, "info",{ font: "30px Arial", fill: "#ffffff" }); 
         
         this.timer = this.game.time.events.loop(1500, this.addRow, this);
@@ -67,7 +67,7 @@ Play.prototype = {
     	_enemy.kill();
     	this.starEmitter.x = _enemy.x;
     	this.starEmitter.y = _enemy.y;
-    	this.starEmitter.start(true, 10000, null, 2);
+    	this.starEmitter.start(true, 10000, null, 10);
     },
     
     endGame: function() {
@@ -77,7 +77,7 @@ Play.prototype = {
     collectStar: function(_ship,_star) {
     	_star.kill();
         score += 1;
-//        this.labelScore.text = score;
+        this.labelScore.text = score;
     },
     
     addRow: function() {
@@ -89,5 +89,15 @@ Play.prototype = {
 //    	if(!starGroup) {
 //    		starGroup = new StarGroup(this.game, this.stars);  
 //    	}
+    },
+    //debug
+    render: function() {
+//    	game.debug.spriteInfo(this.ship, 30, 30);
+        this.ship.weapon.debug(30,this.game.world.height-30);
+        this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
+        this.game.debug.text('this.aliens.countLiving: ' + (this.aliens.countLiving()), 30,this.game.world.height-85);
+        this.game.debug.text('this.aliens.countDead: ' + (this.aliens.countDead()), 30,this.game.world.height-70);
+        this.game.debug.text('this.aliens.length: ' + (this.aliens.length), 30,this.game.world.height-55);
+
     }
 };
