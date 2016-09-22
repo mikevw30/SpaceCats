@@ -52,8 +52,6 @@ Ship.prototype.update = function() {
 		this.body.velocity.y = 0;
 	}
 	
-	
-	
 	if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT))
     {
         this.x -= 4;
@@ -71,12 +69,6 @@ Ship.prototype.update = function() {
     {
         this.y += 4;
     }
-	
-	
-	
-	
-	
-	
 };
 
 Ship.prototype.jump = function() {};

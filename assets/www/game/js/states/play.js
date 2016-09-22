@@ -25,13 +25,18 @@ Play.prototype = {
 //        						      (keys, frames, quantity, collide, collideWorldBounds);
         this.starEmitter.makeParticles('star',null,50,true,false);
         
+        this.starEmitter.checkWorldBounds = true;
+        this.starEmitter.outOfBoundsKill = true;
+        
         this.starEmitter.gravity.x = 0;
         this.starEmitter.gravity.y = 10;
         
-        this.starEmitter.maxParticleSpeed.set(0, 100);
+        this.starEmitter.minParticleSpeed.set(-5, 50);
+        this.starEmitter.maxParticleSpeed.set(5, 100);
         
         score = 0;
         this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
+        this.info = this.game.add.text(game.world.centerX, 20, "info",{ font: "30px Arial", fill: "#ffffff" }); 
         
         this.timer = this.game.time.events.loop(1500, this.addRow, this);
     },
@@ -48,6 +53,8 @@ Play.prototype = {
 //        this.stars.forEach(function(starGroup) {
 //        	this.game.physics.arcade.overlap(this.ship, starGroup, this.collectStar, null, this);
 //        }, this);
+        this.info.text = "stars: "+this.starEmitter.countLiving() +
+        				 "enemy: "+this.aliens.countLiving();
         
     },
     
