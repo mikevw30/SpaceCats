@@ -7,11 +7,9 @@ var Alien = function(game, x, y, frame) {
   this.name = 'alien';
 
   this.body.allowGravity = false;
-//  this.body.immovable = true;
   this.game.add.existing(this);
   this.checkWorldBounds = true;
-  this.outofBoundsKill = true;
-  
+  this.outOfBoundsKill = true;
   
 //  this.weapon = game.add.weapon(30,'aquaball');
 //  this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
@@ -25,4 +23,15 @@ Alien.prototype.constructor = Alien;
 
 Alien.prototype.update = function() {
 	this.weapon.fireAt(50,50);
+};
+
+Alien.prototype.kill = function() {
+    this.alive = false;
+    this.exists = false;
+    this.visible = false;
+    this.events.destroy();
+    if (this.events) {
+        this.events.onKilled$dispatch(this);
+    }
+    return this;
 };

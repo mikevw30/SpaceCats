@@ -23,10 +23,18 @@ Play.prototype = {
         this.game.input.onDown.add(this.ship.jump, this.ship);
 
         this.aliens = this.game.add.group();
+        
+//        this.aliens.addChild(new AlienGroup(this.game, this));
+        
+//        var temp = new  AlienGroup(this.game, this.aliens);
+        
+        
+        
+        
         this.stars = this.game.add.group();
         this.starEmitter = this.game.add.emitter();
 //        						      (keys, frames, quantity, collide, collideWorldBounds);
-        this.starEmitter.makeParticles('star',null,50,true,false);
+        this.starEmitter.makeParticles('star',null,30,true,false);
         
         this.starEmitter.checkWorldBounds = true;
         this.starEmitter.outOfBoundsKill = true;
@@ -49,8 +57,21 @@ Play.prototype = {
         	this.endGame();
         }    	
         this.aliens.forEach(function(pipeGroup) {
-        	this.game.physics.arcade.overlap(this.ship.weapon.bullets, pipeGroup, this.hitEnemy, null, this);
-            this.game.physics.arcade.overlap(this.ship, pipeGroup, this.endGame, null, this);
+        	var remove = true;
+        	
+        	pipeGroup.forEach(function(a){
+        		if(a.alive){
+        			remove = false;
+        		}
+        	}, this);
+        	
+        	if(remove){
+        		this.aliens.remove(pipeGroup);
+        	}
+        	else{
+        		this.game.physics.arcade.overlap(this.ship.weapon.bullets, pipeGroup, this.hitEnemy, null, this);
+        		this.game.physics.arcade.overlap(this.ship, pipeGroup, this.endGame, null, this);
+        	}
         }, this);
         this.game.physics.arcade.overlap(this.ship, this.starEmitter, this.collectStar, null, this);
 //        this.stars.forEach(function(starGroup) {
@@ -85,19 +106,12 @@ Play.prototype = {
     	if(!pipeGroup) {
     		pipeGroup = new AlienGroup(this.game, this.aliens);  
     	}
-//    	var starGroup = this.stars.getFirstExists(false);
-//    	if(!starGroup) {
-//    		starGroup = new StarGroup(this.game, this.stars);  
-//    	}
     },
-    //debug
     render: function() {
-//    	game.debug.spriteInfo(this.ship, 30, 30);
         this.ship.weapon.debug(30,this.game.world.height-30);
         this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
         this.game.debug.text('this.aliens.countLiving: ' + (this.aliens.countLiving()), 30,this.game.world.height-85);
         this.game.debug.text('this.aliens.countDead: ' + (this.aliens.countDead()), 30,this.game.world.height-70);
         this.game.debug.text('this.aliens.length: ' + (this.aliens.length), 30,this.game.world.height-55);
-
     }
 };
