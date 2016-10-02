@@ -3,7 +3,7 @@
 var Alien = function(game, x, y, frame) {
   Phaser.Sprite.call(this, game, x, y, 'alien', frame);
   this.game.physics.arcade.enableBody(this);
-//  this.game.add.existing(this);
+  this.game.add.existing(this);
 
   this.name = 'alien';
   this.anchor.setTo(0.5);
@@ -29,13 +29,13 @@ Alien.prototype.update = function() {
 	}
 };
 
-Alien.prototype.kill = function() {
-    this.alive = false;
-    this.exists = false;
-    this.visible = false;
-    this.events.destroy();
-    if (this.events) {
-        this.events.onKilled$dispatch(this);
-    }
-    return this;
-};
+//Alien.prototype.kill = function() {
+//    this.alive = false;
+//    this.exists = false;
+//    this.visible = false;
+//    this.events.destroy();
+//    if (this.events) {
+//        this.events.onKilled$dispatch(this);
+//    }
+//    return this;
+//};

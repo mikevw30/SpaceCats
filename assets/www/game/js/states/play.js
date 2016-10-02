@@ -3,7 +3,7 @@ var Play = function(game){
 	this.starfield;
 	this.starEmitter;
 	ship = null;
-	this.debug = false;
+	this.debug = true;
 	this.motherShip;
 };
 
@@ -44,7 +44,7 @@ Play.prototype = {
     update: function() {
     	//collision
         this.game.physics.arcade.collide(ship, this.motherShip, this.endGame, null, this);
-        this.motherShip.forEach(function(alienShip) {
+        this.motherShip.forEachAlive(function(alienShip) {
         	this.game.physics.arcade.collide(ship, alienShip.weapon.bullets, this.endGame, null, this);
         },this);
         this.game.physics.arcade.collide(ship.weapon.bullets, this.motherShip, this.hitEnemy, null, this);
@@ -83,11 +83,11 @@ Play.prototype = {
     			},this);
     		},this);
     		
-	        ship.weapon.debug(30,this.game.world.height-55, true);
     	};
     	this.game.debug.text('Debug Info', 30,this.game.world.height-115);
     	this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
     	this.game.debug.text('this.aliens.alive: ' + (this.motherShip.countLiving()), 30,this.game.world.height-85);
     	this.game.debug.text('this.aliens.dead: ' + (this.motherShip.countDead()), 30,this.game.world.height-70);
+//    	ship.weapon.debug(30,this.game.world.height-55, true);
     }    
 };

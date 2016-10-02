@@ -3,7 +3,7 @@
 var MotherShip = function(game) {
 	Phaser.Group.call(this, game);
 	
-	this.MAX_ENEMIES_PER_TYPE = 7;
+	this.MAX_ENEMIES_PER_TYPE = 5;
 	
 	for (var i = 0; i < this.MAX_ENEMIES_PER_TYPE; i++) {
 	    var obstacle = new Alien(game, -1000,-1000,null);
@@ -34,23 +34,24 @@ MotherShip.prototype.addEnemyShip = function(key, numberInSpawn) {
 
 	for (var i = 0; i < numberInSpawn; i++) {
 		if (key == "alien1"){
-			this.getInstance(arr[i] * (16 * 3) - (16 * 3) / 2, 0,150);
+			this.getInstance(arr[i] * (16 * 3) - (16 * 3) / 2, 1,150);
 		}
 	}
 
 };
 
 MotherShip.prototype.getInstance = function(x, y,velocity) {
-	let obj = this.getFirstExists(false);
+	var obj = this.getFirstExists(false);
     if (!obj) {
       obj = new Alien(this.game,x,y,null);
       this.add(obj, true);
-      console.log("adding another enemy");
     }
+    obj.revive();
     obj.x = x;
     obj.y = y;
     obj.body.velocity.y = velocity;
+//    obj.checkWorldBounds = true;
+//    obj.outOfBoundsKill = true;
     
-    obj.revive();
     return obj;
 };
