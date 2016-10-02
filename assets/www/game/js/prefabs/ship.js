@@ -11,6 +11,9 @@ var Ship = function(game, x, y, frame) {
 	this.body.collideWorldBounds = true;
 	this.body.maxVelocity.set(200);
 
+	this.body.setCircle(this.body.width);
+	this.body.offset.setTo(-this.body.width/4, -this.body.height/4 + 5);
+	
 	this.angle -=90;
 	
 	this.scale.setTo(2,2);

@@ -3,7 +3,7 @@
 var Alien = function(game, x, y, frame) {
   Phaser.Sprite.call(this, game, x, y, 'alien', frame);
   this.game.physics.arcade.enableBody(this);
-  this.game.add.existing(this);
+//  this.game.add.existing(this);
 
   this.name = 'alien';
   this.anchor.setTo(0.5);
@@ -39,14 +39,3 @@ Alien.prototype.kill = function() {
     }
     return this;
 };
-
-
-//function MyGroup() { 
-//	Phaser.Group.apply(this, arguments);
-//}
-//MyGroup.prototype = Object.create(Phaser.Group.prototype);
-//MyGroup.prototype.constructor = MyGroup;
-//// if you override, make sure to call the parent function.
-//MyGroup.prototype.update = function () {   
-//	Phaser.Group.prototype.update.apply(this, arguments);
-//};

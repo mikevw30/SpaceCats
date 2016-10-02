@@ -12,7 +12,7 @@ Menu.prototype = {
 
   		var style = { font: "65px Arial", fill: "#e6e6e6", align: "center" };
   		
- 	    var titleText = game.add.text(game.world.centerX, game.world.centerY-game.world.centerY/2, "flappyShip", style);
+ 	    var titleText = game.add.text(game.world.centerX, game.world.centerY-game.world.centerY/2, "Space Cats 2", style);
  	    titleText.anchor.set(0.5);
 	    
 	    var playText = game.add.text(game.world.centerX, game.world.centerY, "Play", style);
@@ -21,7 +21,7 @@ Menu.prototype = {
 	    playText.anchor.set(0.5);
 	    
 	    var style = { font: "25px Arial", fill: "#e6e6e6", align: "center" };
-	    var tapText = game.add.text(game.world.centerX, game.world.centerY+game.world.centerY/2, "Tap to make the ship jump\n?????\nProfit!", style);
+	    var tapText = game.add.text(game.world.centerX, game.world.centerY+game.world.centerY/2, "Tilt your phone to move\nCollect Stars\nProfit!", style);
 	    tapText.anchor.set(0.5);
 		
 	    this.ship = new Ship(this.game, (width/2)-16, height/2);

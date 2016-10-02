@@ -1,19 +1,17 @@
 var Play = function(game){
-	spriteNumber = null;
-	number = 0;
-	workingButtons = true;
-	higher = true;
 	score = 0;
 	this.starfield;
 	this.starEmitter;
 	ship = null;
-	this.debug = true;
+	this.debug = false;
+	this.motherShip;
 };
 
 Play.prototype = {
 	preload: function() {
-		if(this.debug)
+//		if(this.debug){
 			this.game.time.advancedTiming = true;
+//		}
 	},
 	create: function() { 
 		//background
@@ -25,8 +23,7 @@ Play.prototype = {
         ship = new Ship(this.game, game.world.centerX, game.world.centerY);
 
         //groups
-        this.aliens = this.game.add.group();
-        this.stars = this.game.add.group();
+        this.motherShip = new MotherShip(game);
         
         //star spawner on enemy kill
         this.starEmitter = this.game.add.emitter();
@@ -41,30 +38,16 @@ Play.prototype = {
         score = 0;
         this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
         
-        this.timer = this.game.time.events.loop(1500, this.addRow, this);
+        this.timer = this.game.time.events.loop(1000, this.addRow, this);
     },
 
     update: function() {
-        if (ship.y < 0 || ship.y > height){
-        	this.endGame();
-        }    	
-        this.aliens.forEach(function(alienGroup) {
-        	var remove = true;
-        	alienGroup.forEach(function(a){
-        		this.game.physics.arcade.overlap(ship, a.weapon.bullets, this.endGame, null, this);
-        		if(a.alive){
-        			remove = false;
-        		}
-        	}, this);
-        	//remove 
-        	if(remove){
-        		this.aliens.remove(alienGroup);
-        	}
-        	else{
-        		this.game.physics.arcade.overlap(ship, alienGroup, this.endGame, null, this);
-        		this.game.physics.arcade.overlap(ship.weapon.bullets, alienGroup, this.hitEnemy, null, this);
-        	}
-        }, this);
+    	//collision
+        this.game.physics.arcade.collide(ship, this.motherShip, this.endGame, null, this);
+        this.motherShip.forEach(function(alienShip) {
+        	this.game.physics.arcade.collide(ship, alienShip.weapon.bullets, this.endGame, null, this);
+        },this);
+        this.game.physics.arcade.collide(ship.weapon.bullets, this.motherShip, this.hitEnemy, null, this);
         this.game.physics.arcade.overlap(ship, this.starEmitter, this.collectStar, null, this);
     },
     
@@ -87,17 +70,24 @@ Play.prototype = {
     },
     
     addRow: function() {
-    	var alienGroup = this.aliens.getFirstExists(false);
-    	if(!alienGroup) {
-    		alienGroup = new AlienGroup(this.game, this.aliens);  
-    	}
+	  this.motherShip.addEnemyShip("alien1",1);
     },
     render: function() {
     	if(this.debug){
-	        ship.weapon.debug(30,this.game.world.height-55);
-	        this.game.debug.text('Debug Info', 30,this.game.world.height-115);
-	        this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
-	        this.game.debug.text('this.aliens.aliveWaveCount: ' + (this.aliens.countLiving()), 30,this.game.world.height-85);
-    	}
-    }
+    		this.game.debug.body(ship);
+    		
+    		this.motherShip.forEachAlive(function(eShip){
+    				this.game.debug.body(eShip);
+    			eShip.weapon.bullets.forEach(function(b){
+    				this.game.debug.body(b);
+    			},this);
+    		},this);
+    		
+	        ship.weapon.debug(30,this.game.world.height-55, true);
+    	};
+    	this.game.debug.text('Debug Info', 30,this.game.world.height-115);
+    	this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
+    	this.game.debug.text('this.aliens.alive: ' + (this.motherShip.countLiving()), 30,this.game.world.height-85);
+    	this.game.debug.text('this.aliens.dead: ' + (this.motherShip.countDead()), 30,this.game.world.height-70);
+    }    
 };
