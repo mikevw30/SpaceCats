@@ -3,7 +3,7 @@ var Play = function(game){
 	this.starfield;
 	this.starEmitter;
 	ship = null;
-	this.debug = true;
+	this.debug = false;
 	this.motherShip;
 };
 
