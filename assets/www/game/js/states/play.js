@@ -42,22 +42,22 @@ Play.prototype = {
     },
 
     update: function() {
-    	//collision
+    	//using overlap() instead of collide() because the collide() applies physics that i don't need.
         this.game.physics.arcade.collide(ship, this.motherShip, this.endGame, null, this);
         this.motherShip.forEach(function(alienShip) {
-        	this.game.physics.arcade.collide(ship, alienShip.weapon.bullets, this.endGame, null, this);
-        	this.game.physics.arcade.collide(ship.weapon.bullets, alienShip.weapon.bullets, this.removeBullets, null, this);
+        	this.game.physics.arcade.overlap(ship, alienShip.weapon.bullets, this.endGame, null, this);
+        	this.game.physics.arcade.overlap(ship.weapon.bullets, alienShip.weapon.bullets, this.removeBullets, null, this);
         },this);
-        this.game.physics.arcade.collide(ship.weapon.bullets, this.motherShip, this.hitEnemy, null, this);
+        this.game.physics.arcade.overlap(ship.weapon.bullets, this.motherShip, this.hitEnemy, null, this);
         this.game.physics.arcade.overlap(ship, this.starEmitter, this.collectStar, null, this);
     },
     
     hitEnemy: function(_bullet, _enemy) {
     	_bullet.kill();
     	_enemy.kill();
-//    	this.starEmitter.x = _enemy.x;
-//    	this.starEmitter.y = _enemy.y;
-//    	this.starEmitter.start(true, 10000, null, 2);
+    	this.starEmitter.x = _enemy.x;
+    	this.starEmitter.y = _enemy.y;
+    	this.starEmitter.start(true, 10000, null, 2);
     	console.log("hit enemy");
     },
     
@@ -95,6 +95,6 @@ Play.prototype = {
     	this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
     	this.game.debug.text('this.aliens.alive: ' + (this.motherShip.countLiving()), 30,this.game.world.height-85);
     	this.game.debug.text('this.aliens.dead: ' + (this.motherShip.countDead()), 30,this.game.world.height-70);
-//    	ship.weapon.debug(30,this.game.world.height-55, true);
+    	ship.weapon.debug(30,this.game.world.height-55);
     }    
 };
