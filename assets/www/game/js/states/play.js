@@ -27,7 +27,7 @@ Play.prototype = {
         
         //star spawner on enemy kill
         this.starEmitter = this.game.add.emitter();
-        this.starEmitter.makeParticles('star',null,30,true,false);
+        this.starEmitter.makeParticles('star',null,20,true,false);
         this.starEmitter.checkWorldBounds = true;
         this.starEmitter.outOfBoundsKill = true;
         this.starEmitter.gravity.x = 0;
@@ -55,9 +55,9 @@ Play.prototype = {
     hitEnemy: function(_bullet, _enemy) {
     	_bullet.kill();
     	_enemy.kill();
-    	this.starEmitter.x = _enemy.x;
-    	this.starEmitter.y = _enemy.y;
-    	this.starEmitter.start(true, 10000, null, 2);
+//    	this.starEmitter.x = _enemy.x;
+//    	this.starEmitter.y = _enemy.y;
+//    	this.starEmitter.start(true, 10000, null, 2);
     	console.log("hit enemy");
     },
     
