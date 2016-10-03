@@ -44,8 +44,9 @@ Play.prototype = {
     update: function() {
     	//collision
         this.game.physics.arcade.collide(ship, this.motherShip, this.endGame, null, this);
-        this.motherShip.forEachAlive(function(alienShip) {
+        this.motherShip.forEach(function(alienShip) {
         	this.game.physics.arcade.collide(ship, alienShip.weapon.bullets, this.endGame, null, this);
+        	this.game.physics.arcade.collide(ship.weapon.bullets, alienShip.weapon.bullets, this.removeBullets, null, this);
         },this);
         this.game.physics.arcade.collide(ship.weapon.bullets, this.motherShip, this.hitEnemy, null, this);
         this.game.physics.arcade.overlap(ship, this.starEmitter, this.collectStar, null, this);
@@ -57,6 +58,7 @@ Play.prototype = {
     	this.starEmitter.x = _enemy.x;
     	this.starEmitter.y = _enemy.y;
     	this.starEmitter.start(true, 10000, null, 2);
+    	console.log("hit enemy");
     },
     
     endGame: function() {
@@ -67,6 +69,11 @@ Play.prototype = {
     	_star.kill();
         score += 1;
         this.labelScore.text = score;
+    },
+    
+    removeBullets: function(_bullet1,_bullet2) {
+    	_bullet1.kill();
+    	_bullet2.kill();
     },
     
     addRow: function() {

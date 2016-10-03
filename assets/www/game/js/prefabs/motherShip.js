@@ -3,12 +3,13 @@
 var MotherShip = function(game) {
 	Phaser.Group.call(this, game);
 	
-//	this.MAX_ENEMIES_PER_TYPE = 1;
-//	
-//	for (var i = 0; i < this.MAX_ENEMIES_PER_TYPE; i++) {
-//	    var obstacle = new Alien(game, -1000,-1000,null);
-//	    this.add(obstacle);
-//	}
+	this.MAX_ENEMIES_PER_TYPE = 5;
+	
+	for (var i = 0; i < this.MAX_ENEMIES_PER_TYPE; i++) {
+	    var obstacle = new Alien(game, -1000,-1000,null);
+	    obstacle.kill();
+	    this.add(obstacle);
+	}
 };
 
 MotherShip.prototype = Object.create(Phaser.Group.prototype);
@@ -44,14 +45,10 @@ MotherShip.prototype.getInstance = function(x, y,velocity) {
 	var obj = this.getFirstExists(false);
     if (!obj) {
       obj = new Alien(this.game,x,y,null);
-      this.add(obj, true);
+      this.add(obj);
     }
-    obj.revive();
-    obj.x = x;
-    obj.y = y;
+    obj.reset(x,y);
     obj.body.velocity.y = velocity;
-//    obj.checkWorldBounds = true;
-//    obj.outOfBoundsKill = true;
     
     return obj;
 };
