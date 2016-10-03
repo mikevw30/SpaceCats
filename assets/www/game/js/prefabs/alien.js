@@ -25,7 +25,8 @@ Alien.prototype.constructor = Alien;
 
 Alien.prototype.update = function() {
 	if(this.alive){
-		this.weapon.fire(this, this.x, this.game.world.height);
+		this.weapon.fire(this, ship.x, ship.y);
+//		this.weapon.fire(this, this.x, this.game.world.height);
 	}
 };
 
