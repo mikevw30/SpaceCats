@@ -2,6 +2,8 @@ class PlayerMovementListener {
 	
 	constructor(player){
 		this.player = player;
+		
+		return this;
 	}
 	
 	listen(){
@@ -47,4 +49,4 @@ class PlayerMovementListener {
 	    	this.player.y += 4;
 	    }
 	}
-}
+};

@@ -6,11 +6,11 @@ class StarField extends Phaser.TileSprite {
 		super(game, x, y, width, height, "stars");
 		this.autoScroll(0,10);
 		game.add.existing(this);
+		
+		return this;
 	}
 	
 	update() {
 		this.tilePosition.y += .25;
 	}
-}
-
-
+};

@@ -1,42 +1,45 @@
 'use strict';
-
-var MotherShip = function(player) {
-	Phaser.Group.call(this, game);
+class MotherShip extends Phaser.Group {
 	
-	this.player = player;
-	
-	this.MAX_ENEMIES_PER_TYPE = 5;
-	
-	for (var i = 0; i < this.MAX_ENEMIES_PER_TYPE; i++) {
-	    var obstacle = new Alien(game, -1000,-1000,null,player);
-	    obstacle.kill();
-	    this.add(obstacle);
+	constructor(target, instances, spriteType){
+		super(game, game.world, name);
+		this.target = target;
+		this.spriteType = spriteType;
+		this.instances = instances;
+		
+		this.spawnPool();
+		
+		return this;
 	}
-};
-
-MotherShip.prototype = Object.create(Phaser.Group.prototype);
-MotherShip.prototype.constructor = MotherShip;
-
-MotherShip.prototype.addEnemyShip = function(key, numberInSpawn) {
 	
-	var numOfHoles = game.width / (16 * 2);
+	spawnPool(){
+		if (this.instances > 0) { 
+			let sprite;
+			for (var i = 0; i < this.instances; i++) {
+				sprite = this.add(new this.spriteType(this.game,-1000,-1000,null,this.target)); // Add new sprite
+				sprite.kill();
+			}
+		}
+	}
+	
+	addEnemyShip(key, numberInSpawn) {
+		
+		let numOfHoles = game.width / (16 * 2);
 
-	var randomnumber = game.rnd.integerInRange(1, numOfHoles - 1);
+		let randomnumber = game.rnd.integerInRange(1, numOfHoles - 1);
 
-	if (key == "alien1"){
 		this.getInstance(randomnumber * (16 * 2) - (16 * 2) / 2, 1, 150);
 	}
-
-};
-
-MotherShip.prototype.getInstance = function(x, y,velocity) {
-	var obj = this.getFirstExists(false);
-    if (!obj) {
-      obj = new Alien(this.game,x,y,null,this.target);
-      this.add(obj);
-    }
-    obj.reset(x,y);
-    obj.body.velocity.y = velocity;
-    
-    return obj;
+	
+	getInstance(x, y,velocity) {
+		let obj = this.getFirstExists(false);
+	    if (!obj) {
+	      obj = new this.spriteType(this.game,x,y,null,this.target);
+	      this.add(obj, true);
+	    }
+	    obj.reset(x,y);
+	    obj.body.velocity.y = velocity;
+	    
+	    return obj;
+	}
 };

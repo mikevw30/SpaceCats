@@ -1,9 +1,9 @@
 'use strict';
 
-class Alien extends Phaser.Sprite{
+class Alien2 extends Phaser.Sprite{
 	
 	constructor(game, x, y, frame, target){
-		super(game, x, y, 'alien', frame);
+		super(game, x, y, 'alien2', frame);
 		
 		this.target = target || {x:this.x, y:this.game.world.height};
 		this.config();
@@ -16,13 +16,12 @@ class Alien extends Phaser.Sprite{
 	config(){
 		this.game.physics.arcade.enableBody(this);
 		this.game.add.existing(this);
-		this.name = 'alien';
+		this.name = 'alien2';
+		this.scale.setTo(.5,.5); 
 		this.anchor.setTo(0.5);
 		this.checkWorldBounds = true;
 		this.outOfBoundsKill = true;
 		this.body.allowGravity = false;
-		this.angle = 180;
-		
 	}
 	
 	addMovement(){
@@ -32,10 +31,9 @@ class Alien extends Phaser.Sprite{
 	addWeapon(){
 		this.weapon = game.add.weapon(4,'redball');
 		this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-		this.weapon.fireRate = 1500;
-		this.weapon.trackSprite(this, 0, 0, true);
+		this.weapon.fireRate = 250;
+		this.weapon.trackSprite(this, 0, 0);
 	}
-	
 	
 	update(){
 		if(this.alive){

@@ -48,6 +48,7 @@ class Preload extends Phaser.State {
 		this.game.load.image("stars","game/assets/stars.jpg");
 		this.game.load.image("ship","game/assets/thrust_ship.png");
 		this.game.load.image("alien","game/assets/xenon2_ship.png");
+		this.game.load.image("alien2","game/assets/bsquadron3.png");
 
 		//bullets
 		this.game.load.image("aquaball","game/assets/aqua_ball.png");

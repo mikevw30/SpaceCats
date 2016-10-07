@@ -6,6 +6,8 @@ class GameText extends Phaser.Text {
 		super(game, x, y, text, style);
 		this.state = state;
 		this.config();
+		
+		return this;
 	}
 	
 	config(){
