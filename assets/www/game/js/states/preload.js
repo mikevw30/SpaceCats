@@ -45,10 +45,6 @@ class Preload extends Phaser.State {
     }
     
     loadData(){
-		this.game.load.spritesheet("numbers","game/assets/numbers.png",100,100);
-		this.game.load.image("gametitle","game/assets/gametitle.png");
-		this.game.load.image("play","game/assets/play.png");
-		this.game.load.image("gameover","game/assets/gameover.png");
 		this.game.load.image("stars","game/assets/stars.jpg");
 		this.game.load.image("ship","game/assets/thrust_ship.png");
 
