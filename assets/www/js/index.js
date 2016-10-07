@@ -1,46 +1,46 @@
-var watchID = null;
-
-// Wait for Cordova to load
+//var watchID = null;
 //
-document.addEventListener("deviceready", onDeviceReady, false);
-
-// Cordova is ready
+//// Wait for Cordova to load
+////
+//document.addEventListener("deviceready", onDeviceReady, false);
 //
-function onDeviceReady() {
-    startWatch();
-}
-
-// Start watching the acceleration
+//// Cordova is ready
+////
+//function onDeviceReady() {
+//    startWatch();
+//}
 //
-function startWatch() {
-
-    // Update acceleration every 3 seconds
-    var options = { frequency: 10 };
-
-    watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
-}
-
-// Stop watching the acceleration
+//// Start watching the acceleration
+////
+//function startWatch() {
 //
-function stopWatch() {
-    if (watchID) {
-        navigator.accelerometer.clearWatch(watchID);
-        watchID = null;
-    }
-}
-
-// onSuccess: Get a snapshot of the current acceleration
+//    // Update acceleration every 3 seconds
+//    var options = { frequency: 10 };
 //
-function onSuccess(acceleration) {
-    var element = document.getElementById('accelerometer');
-    element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
-                        'Acceleration Y: ' + acceleration.y + '<br />' +
-                        'Acceleration Z: ' + acceleration.z + '<br />' +
-                        'Timestamp: '      + acceleration.timestamp + '<br />';
-}
-
-// onError: Failed to get the acceleration
+//    watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+//}
 //
-function onError() {
-    alert('onError!');
-}
+//// Stop watching the acceleration
+////
+//function stopWatch() {
+//    if (watchID) {
+//        navigator.accelerometer.clearWatch(watchID);
+//        watchID = null;
+//    }
+//}
+//
+//// onSuccess: Get a snapshot of the current acceleration
+////
+//function onSuccess(acceleration) {
+//    var element = document.getElementById('accelerometer');
+//    element.innerHTML = 'Acceleration X: ' + acceleration.x + '<br />' +
+//                        'Acceleration Y: ' + acceleration.y + '<br />' +
+//                        'Acceleration Z: ' + acceleration.z + '<br />' +
+//                        'Timestamp: '      + acceleration.timestamp + '<br />';
+//}
+//
+//// onError: Failed to get the acceleration
+////
+//function onError() {
+//    alert('onError!');
+//}
