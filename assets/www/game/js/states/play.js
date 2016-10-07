@@ -41,7 +41,7 @@ class Play extends Phaser.State{
         this.game.physics.arcade.collide(this.ship, this.motherShip, this.endGame, null, this);
         this.motherShip.forEach(function(alienShip) {
         	this.game.physics.arcade.overlap(this.ship, alienShip.weapon.bullets, this.endGame, null, this);
-        	this.game.physics.arcade.overlap(this.ship.weapon.bullets, alienShip.weapon.bullets, this.removeBullets, null, this);
+//        	this.game.physics.arcade.overlap(this.ship.weapon.bullets, alienShip.weapon.bullets, this.removeBullets, null, this);
         },this);
         this.game.physics.arcade.overlap(this.ship.weapon.bullets, this.motherShip, this.hitEnemy, null, this);
         this.game.physics.arcade.overlap(this.ship, this.starEmitter, this.collectStar, null, this);

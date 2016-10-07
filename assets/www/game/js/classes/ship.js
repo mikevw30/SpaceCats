@@ -34,7 +34,7 @@ class Ship extends Phaser.Sprite{
 		this.weapon = game.add.weapon(20,'aquaball');
 		this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
 	    this.weapon.fireRate = 300;
-	    this.weapon.trackSprite(this, this.body.width, 0, true);
+	    this.weapon.trackSprite(this, this.body.width-20, 0, true);
 	}
 	
 	update(){

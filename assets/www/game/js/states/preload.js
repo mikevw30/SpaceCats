@@ -47,6 +47,7 @@ class Preload extends Phaser.State {
     loadData(){
 		this.game.load.image("stars","game/assets/stars.jpg");
 		this.game.load.image("ship","game/assets/thrust_ship.png");
+		this.game.load.image("alien","game/assets/xenon2_ship.png");
 
 		//bullets
 		this.game.load.image("aquaball","game/assets/aqua_ball.png");
@@ -55,25 +56,6 @@ class Preload extends Phaser.State {
         // Set the physics system
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        let alien = [
-                     '....DDDDDDDD....',
-                     '...DDEEDDDDDD...',
-                     '..DDDEEDDDDDDD..',
-                     '..DDDDDDDDDDDD..',
-                     '..DDDD5555DDDD..',
-                     '..DDD555555DDD..',
-                     '..DDD555555DDD..',
-                     '..DDD555555DDD..',
-                     '..334244333333..',
-                     '.33344443333333.',
-                     '3333444433333333',
-                     '....5...5..5....',
-                     '...5....5...5...',
-                     '.66....66....66.',
-                     '.66....66....66.'
-                   ];
-        this.game.create.texture('alien', alien, 2, 2);
-        
         let star = [
                     '.....828.....',
                     '....72227....',

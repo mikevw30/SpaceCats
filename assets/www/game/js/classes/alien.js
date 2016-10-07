@@ -19,6 +19,7 @@ class Alien extends Phaser.Sprite{
 		this.checkWorldBounds = true;
 		this.outOfBoundsKill = true;
 		this.body.allowGravity = false;
+		this.angle = 180;
 		
 	}
 	
@@ -30,7 +31,7 @@ class Alien extends Phaser.Sprite{
 		this.weapon = game.add.weapon(2,'redball');
 		this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
 		this.weapon.fireRate = 1500;
-		this.weapon.trackSprite(this, this.body.width, 0, true);
+		this.weapon.trackSprite(this, 0, 0, true);
 	}
 	
 	
