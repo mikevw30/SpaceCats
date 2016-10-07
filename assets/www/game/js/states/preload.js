@@ -1,38 +1,50 @@
-var Preload = function(game){
-	 this.ready = false;
-	 this.loadingBar = null;
-};
+'use strict';
 
-Preload.prototype = {
-	init: function(){
+class Preload extends Phaser.State {
+
+	constructor(){
+		super();
+		this.ready = false;
+		this.loadingBar = null;
+	}
+
+	init(){
 		this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
 		this.scale.pageAlignHorizontally = true;
 		this.game.forceSingleUpdate = true;
-	},
-	preload: function(){ 
+	}
+	
+	preload(){ 
 		this.loadingBar = this.add.sprite(game.world.centerX,game.world.centerY,"loading");
 		this.loadingBar.anchor.setTo(0.5);
 		this.load.setPreloadSprite(this.loadingBar,0);
 		
+		this.game.time.advancedTiming = true;
+		this.game.physics.startSystem(Phaser.Physics.ARCADE);
+		
 		this.loadData();
 		this.onLoadComplete();
 		
-	},
-    create: function() {
+	} 
+	
+    create() {
     	console.log("Preload state start");
     	this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
     	this.scale.pageAlignHorizontally = true;
-	},
-	update: function(){
+	}
+    
+	update(){
       if(!!this.ready) {
     	  console.log("preloader state finished");
           this.game.state.start('Menu');
         }
-	},
-    onLoadComplete: function() {
+	}
+	
+    onLoadComplete() {
         this.ready = true;
-    },
-    loadData: function(){
+    }
+    
+    loadData(){
 		this.game.load.spritesheet("numbers","game/assets/numbers.png",100,100);
 		this.game.load.image("gametitle","game/assets/gametitle.png");
 		this.game.load.image("play","game/assets/play.png");
@@ -47,46 +59,7 @@ Preload.prototype = {
         // Set the physics system
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-//        var ship = [
-//                    '.....3..........',
-//                    '.....2..........',
-//                    '.....2..........',
-//                    '.....2..........',
-//                    '.....2..........',
-//                    '.....222222FFFF.',
-//                    '.....2D22222222F',
-//                    '366F2DDDD2222222',
-//                    '633F2DDDD2222222',
-//                    '.....2D22222222F',
-//                    '.....222222FFFF.',
-//                    '.....2..........',
-//                    '.....2..........',
-//                    '.....2..........',
-//                    '.....2..........',
-//                    '.....3..........'
-//                  ]; 
-//        var ship = [
-//                    '......F22F......',
-//                    '.....F2222F.....',
-//                    '.....F2222F.....',
-//                    '.....F2222F.....',
-//                    '.....F2222F.....',
-//                    '....F222222F....',
-//                    '....F222222F....',
-//                    '...3222DD2223...',
-//                    '..32222DD22223..',
-//                    '.32222DDDD22223.',
-//                    '3222222DD2222223',
-//                    '....F222222F....',
-//                    '.....FFFFFF.....',
-//                    '......3636......',
-//                    '......3636......',
-//                    '.......36.......',
-//                    ]; 
-        
-//        this.game.create.texture('ship', ship, 3, 3);  
-        
-        var alien = [
+        let alien = [
                      '....DDDDDDDD....',
                      '...DDEEDDDDDD...',
                      '..DDDEEDDDDDDD..',
@@ -105,7 +78,7 @@ Preload.prototype = {
                    ];
         this.game.create.texture('alien', alien, 3, 3);
         
-        var star = [
+        let star = [
                     '.....828.....',
                     '....72227....',
                     '....82228....',

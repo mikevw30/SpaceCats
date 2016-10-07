@@ -1,85 +1,81 @@
-var Play = function(game){
-	score = 0;
-	this.starfield;
-	this.starEmitter;
-	ship = null;
-	this.debug = false;
-	this.motherShip;
-};
+'use strict';
 
-Play.prototype = {
-	preload: function() {
-//		if(this.debug){
-			this.game.time.advancedTiming = true;
-//		}
-	},
-	create: function() { 
+class Play extends Phaser.State{
+	constructor(){
+		super();
+		this.score = 0;
+		this.debug = false;
+		this.ship;
+		this.starEmitter;
+		this.motherShip;
+	}
+
+	create() { 
 		//background
-		this.game.physics.startSystem(Phaser.Physics.ARCADE);
-		this.starField = new StarField(game, 0, 0, width, height);
-  		this.game.add.existing(this.starField);
+		let starField = new StarField(game, 0, 0, game.width, game.height);
 
   		//player ship as global variable.
-        ship = new Ship(this.game, game.world.centerX, game.world.centerY);
+        this.ship = new Ship(this.game, game.world.centerX, game.world.centerY);
 
-        //groups
-        this.motherShip = new MotherShip(game);
+//        let target = {x: this.ship.x, y: this.ship.y};
+        this.motherShip = new MotherShip(this.ship);
         
         //star spawner on enemy kill
         this.starEmitter = this.game.add.emitter();
         this.starEmitter.makeParticles('star',null,20,true,false);
         this.starEmitter.checkWorldBounds = true;
         this.starEmitter.outOfBoundsKill = true;
-        this.starEmitter.gravity.x = 0;
-        this.starEmitter.gravity.y = 10;
+        this.starEmitter.x = 0;
+        this.starEmitter.y = 10;
         this.starEmitter.minParticleSpeed.set(-5, 50);
         this.starEmitter.maxParticleSpeed.set(5, 100);
         
-        score = 0;
+        this.score = 0;
         this.labelScore = this.game.add.text(20, 20, "0",{ font: "30px Arial", fill: "#ffffff" }); 
         
         this.timer = this.game.time.events.loop(1000, this.addRow, this);
-    },
+    }
 
-    update: function() {
+    update() {
     	//using overlap() instead of collide() because the collide() applies physics that i don't need.
-        this.game.physics.arcade.collide(ship, this.motherShip, this.endGame, null, this);
+        this.game.physics.arcade.collide(this.ship, this.motherShip, this.endGame, null, this);
         this.motherShip.forEach(function(alienShip) {
-        	this.game.physics.arcade.overlap(ship, alienShip.weapon.bullets, this.endGame, null, this);
+        	this.game.physics.arcade.overlap(this.ship, alienShip.weapon.bullets, this.endGame, null, this);
 //        	this.game.physics.arcade.overlap(ship.weapon.bullets, alienShip.weapon.bullets, this.removeBullets, null, this);
         },this);
-        this.game.physics.arcade.overlap(ship.weapon.bullets, this.motherShip, this.hitEnemy, null, this);
-        this.game.physics.arcade.overlap(ship, this.starEmitter, this.collectStar, null, this);
-    },
+        this.game.physics.arcade.overlap(this.ship.weapon.bullets, this.motherShip, this.hitEnemy, null, this);
+        this.game.physics.arcade.overlap(this.ship, this.starEmitter, this.collectStar, null, this);
+    }
     
-    hitEnemy: function(_bullet, _enemy) {
+    hitEnemy(_bullet, _enemy) {
     	_bullet.kill();
     	_enemy.kill();
     	this.starEmitter.x = _enemy.x;
     	this.starEmitter.y = _enemy.y;
     	this.starEmitter.start(true, 10000, null, 2);
     	console.log("hit enemy");
-    },
+    }
     
-    endGame: function() {
-        this.game.state.start('GameOver',true,false,score);
-    },
+    endGame() {
+        this.game.state.start('GameOver',true,false,this.score);
+    }
 
-    collectStar: function(_ship,_star) {
+    collectStar(_ship,_star) {
     	_star.kill();
-        score += 1;
-        this.labelScore.text = score;
-    },
+        this.score += 1;
+        this.labelScore.text = this.score;
+    }
     
-    removeBullets: function(_bullet1,_bullet2) {
+    removeBullets(_bullet1,_bullet2) {
     	_bullet1.kill();
     	_bullet2.kill();
-    },
+    }
     
-    addRow: function() {
+    addRow() {
 	  this.motherShip.addEnemyShip("alien1",1);
-    },
-    render: function() {
+    }
+    
+    render() {
     	if(this.debug){
     		this.game.debug.body(ship);
     		
@@ -95,6 +91,6 @@ Play.prototype = {
     	this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
     	this.game.debug.text('this.aliens.alive: ' + (this.motherShip.countLiving()), 30,this.game.world.height-85);
     	this.game.debug.text('this.aliens.dead: ' + (this.motherShip.countDead()), 30,this.game.world.height-70);
-    	ship.weapon.debug(30,this.game.world.height-55);
+    	this.ship.weapon.debug(30,this.game.world.height-55);
     }    
-};
+}

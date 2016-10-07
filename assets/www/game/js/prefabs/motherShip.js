@@ -1,12 +1,14 @@
 'use strict';
 
-var MotherShip = function(game) {
+var MotherShip = function(player) {
 	Phaser.Group.call(this, game);
+	
+	this.player = player;
 	
 	this.MAX_ENEMIES_PER_TYPE = 5;
 	
 	for (var i = 0; i < this.MAX_ENEMIES_PER_TYPE; i++) {
-	    var obstacle = new Alien(game, -1000,-1000,null);
+	    var obstacle = new Alien(game, -1000,-1000,null,player);
 	    obstacle.kill();
 	    this.add(obstacle);
 	}
@@ -17,7 +19,7 @@ MotherShip.prototype.constructor = MotherShip;
 
 MotherShip.prototype.addEnemyShip = function(key, numberInSpawn) {
 	
-	var numOfHoles = window.width / (16 * 3);
+	var numOfHoles = game.width / (16 * 3);
 
 	var arr = [];
 	while (arr.length < numOfHoles) {
@@ -44,7 +46,7 @@ MotherShip.prototype.addEnemyShip = function(key, numberInSpawn) {
 MotherShip.prototype.getInstance = function(x, y,velocity) {
 	var obj = this.getFirstExists(false);
     if (!obj) {
-      obj = new Alien(this.game,x,y,null);
+      obj = new Alien(this.game,x,y,null,this.target);
       this.add(obj);
     }
     obj.reset(x,y);

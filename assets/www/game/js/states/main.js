@@ -1,9 +1,24 @@
 'use strict';
-var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, "game");
-game.state.add("Boot",Boot);
-game.state.add("Preload",Preload);
-game.state.add("Menu",Menu);
-game.state.add("Play",Play);
-game.state.add("GameOver",gameOver);
 
-game.state.start("Boot");
+class Game extends Phaser.Game { 
+
+	constructor() {
+		super(window.innerWidth, window.innerHeight, Phaser.AUTO, "game");
+		this.addStates();
+		this.start();
+	} 
+	
+	addStates(){
+		this.state.add("Boot",Boot);
+		this.state.add("Preload",Preload);
+		this.state.add("Menu",Menu);
+		this.state.add("Play",Play);
+		this.state.add("GameOver",GameOver);
+	}
+	
+	start(){
+		this.state.start("Boot");
+	}
+}
+
+let game = new Game();

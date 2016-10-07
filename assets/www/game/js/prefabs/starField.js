@@ -1,13 +1,16 @@
 'use strict';
 
-var StarField = function(game, x, y, width, height) {
-  Phaser.TileSprite.call(this, game, x, y, width, height, "stars");
-  this.autoScroll(0,10);
-};
+class StarField extends Phaser.TileSprite {
 
-StarField.prototype = Object.create(Phaser.TileSprite.prototype);
-StarField.constructor = StarField;
+	constructor(game,x,y,width,height){
+		super(game, x, y, width, height, "stars");
+		this.autoScroll(0,10);
+		game.add.existing(this);
+	}
+	
+	update() {
+		this.tilePosition.y += .25;
+	}
+}
 
-StarField.prototype.update = function() {
-	this.tilePosition.y += .25;
-};
+
