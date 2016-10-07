@@ -72,7 +72,7 @@ class Preload extends Phaser.State {
                      '.66....66....66.',
                      '.66....66....66.'
                    ];
-        this.game.create.texture('alien', alien, 3, 3);
+        this.game.create.texture('alien', alien, 2, 2);
         
         let star = [
                     '.....828.....',
@@ -88,6 +88,6 @@ class Preload extends Phaser.State {
                     '.27887.78872.',
                     '.787.....787.'
                   ];
-        this.game.create.texture('star', star, 3, 3);
+        this.game.create.texture('star', star, 2, 2);
     }
 };

@@ -19,26 +19,12 @@ MotherShip.prototype.constructor = MotherShip;
 
 MotherShip.prototype.addEnemyShip = function(key, numberInSpawn) {
 	
-	var numOfHoles = game.width / (16 * 3);
+	var numOfHoles = game.width / (16 * 2);
 
-	var arr = [];
-	while (arr.length < numOfHoles) {
-		var randomnumber = game.rnd.integerInRange(0, numOfHoles - 1);
-		var found = false;
-		for (var i = 0; i < arr.length; i++) {
-			if (arr[i] == randomnumber) {
-				found = true;
-				break;
-			}
-		}
-		if (!found)
-			arr[arr.length] = randomnumber;
-	}
+	var randomnumber = game.rnd.integerInRange(1, numOfHoles - 1);
 
-	for (var i = 0; i < numberInSpawn; i++) {
-		if (key == "alien1"){
-			this.getInstance(arr[i] * (16 * 3) - (16 * 3) / 2, 1,150);
-		}
+	if (key == "alien1"){
+		this.getInstance(randomnumber * (16 * 2) - (16 * 2) / 2, 1, 150);
 	}
 
 };

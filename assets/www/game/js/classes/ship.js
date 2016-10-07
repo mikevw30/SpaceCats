@@ -27,7 +27,7 @@ class Ship extends Phaser.Sprite{
 		
 		this.angle -=90;
 		
-		this.scale.setTo(2,2);
+		this.scale.setTo(1.5,1.5);
 	}
 	
 	addWeapon(){

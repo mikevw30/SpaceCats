@@ -29,7 +29,7 @@ class Alien extends Phaser.Sprite{
 	addWeapon(){
 		this.weapon = game.add.weapon(2,'redball');
 		this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-		this.weapon.fireRate = 2000;
+		this.weapon.fireRate = 1500;
 		this.weapon.trackSprite(this, this.body.width, 0, true);
 	}
 	
