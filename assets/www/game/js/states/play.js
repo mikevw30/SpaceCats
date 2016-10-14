@@ -40,8 +40,8 @@ class Play extends Phaser.State{
     hitEnemy(_bullet, _enemy) {
     	_bullet.kill();
     	_enemy.kill();
-//    	this.starEmitter.setLocation(_enemy.x,_enemy.y);
-//    	this.starEmitter.startEmitter();
+    	this.starEmitter.setLocation(_enemy.x,_enemy.y);
+    	this.starEmitter.startEmitter();
     }
     
     endGame() {
@@ -64,10 +64,10 @@ class Play extends Phaser.State{
     }
     
     render() {
-//    	this.game.debug.text('Debug Info', 30,this.game.world.height-115);
+    	this.game.debug.text('Debug Info', 30,this.game.world.height-115);
     	this.game.debug.text('fps: ' + (this.game.time.fps), 30,this.game.world.height-100);
-//    	this.game.debug.text('aliens.alive: ' + (this.enemyGroup.getAlive()), 30,this.game.world.height-85);
-//    	this.game.debug.text('aliens.dead: ' + (this.enemyGroup.getDead()), 30,this.game.world.height-70);
-//    	this.ship.weapon.debug(30,this.game.world.height-55);
+    	this.game.debug.text('aliens.alive: ' + (this.enemyGroup.getAlive()), 30,this.game.world.height-85);
+    	this.game.debug.text('aliens.dead: ' + (this.enemyGroup.getDead()), 30,this.game.world.height-70);
+    	this.ship.weapon.debug(30,this.game.world.height-55);
     }    
 };
