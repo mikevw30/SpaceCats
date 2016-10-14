@@ -23,7 +23,6 @@ class MotherShip extends Phaser.Group {
 	}
 	
 	addEnemyShip(key, numberInSpawn) {
-		
 		let numOfHoles = game.width / (16 * 2);
 
 		let randomnumber = game.rnd.integerInRange(1, numOfHoles - 1);
@@ -31,7 +30,7 @@ class MotherShip extends Phaser.Group {
 		this.getInstance(randomnumber * (16 * 2) - (16 * 2) / 2, 1, 150);
 	}
 	
-	getInstance(x, y,velocity) {
+	getInstance(x, y, velocity) {
 		let obj = this.getFirstExists(false);
 	    if (!obj) {
 	      obj = new this.spriteType(this.game,x,y,null,this.target);
