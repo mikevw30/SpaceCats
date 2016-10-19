@@ -10,7 +10,6 @@
   <preference name="webviewbounce" value="true"/>
   <preference name="prerendered-icon" value="true"/>
   <preference name="stay-in-webview" value="false"/>
-  <preference name="ios-statusbarstyle" value="black-opaque"/>
   <preference name="detect-data-types" value="true"/>
   <preference name="exit-on-suspend" value="false"/>
   <preference name="show-splash-screen-spinner" value="true"/>
@@ -38,15 +37,6 @@
   <icon src="www/res/icon/android/icon-48-mdpi.png" gap:platform="android" gap:qualifier="mdpi"/>
   <icon src="www/res/icon/android/icon-72-hdpi.png" gap:platform="android" gap:qualifier="hdpi"/>
   <icon src="www/res/icon/android/icon-96-xhdpi.png" gap:platform="android" gap:qualifier="xhdpi"/>
-  <icon src="www/res/icon/blackberry/icon-80.png" gap:platform="blackberry"/>
-  <icon src="www/res/icon/blackberry/icon-80.png" gap:platform="blackberry" gap:state="hover"/>
-  <icon src="www/res/icon/ios/icon-57.png" gap:platform="ios" width="57" height="57"/>
-  <icon src="www/res/icon/ios/icon-72.png" gap:platform="ios" width="72" height="72"/>
-  <icon src="www/res/icon/ios/icon-57-2x.png" gap:platform="ios" width="114" height="114"/>
-  <icon src="www/res/icon/ios/icon-72-2x.png" gap:platform="ios" width="144" height="144"/>
-  <icon src="www/res/icon/webos/icon-64.png" gap:platform="webos"/>
-  <icon src="www/res/icon/windows-phone/icon-48.png" gap:platform="winphone"/>
-  <icon src="www/res/icon/windows-phone/icon-173-tile.png" gap:platform="winphone" gap:role="background"/>
   
   <!-- Whitelist setup -->
 <!--   <gap:plugin name="cordova-plugin-whitelist" source="npm" />   -->
@@ -55,11 +45,11 @@
 <!--   <allow-intent href="*" /> -->
 <!--   <access origin="*" /> -->
   
-  <platform name="android">
-  	<allow-navigation href="*" />
-  	<allow-intent href="*" />
-  	<access origin="*" />
-  </platform>
+<!--   <platform name="android"> -->
+<!--   	<allow-navigation href="*" /> -->
+<!--   	<allow-intent href="*" /> -->
+<!--   	<access origin="*" /> -->
+<!--   </platform> -->
   
   <feature name="Accelerometer">
     <param name="android-package" value="org.apache.cordova.devicemotion.AccelListener" />
