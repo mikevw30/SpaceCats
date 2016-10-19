@@ -18,6 +18,10 @@ class Play extends Phaser.State{
 
         this.enemyGroup = new EnemyGroup(this.ship);
         
+        this.powerupGroup = game.add.group();
+        
+//        this.fireRatePool = new RewardPool(2,FireRatePower);
+        
         this.starEmitter = new StarEmitter();
         
         this.score = 0;
@@ -35,6 +39,7 @@ class Play extends Phaser.State{
     		},this)
     	},this)
         this.game.physics.arcade.overlap(this.ship, this.starEmitter, this.collectStar, null, this);
+    	this.game.physics.arcade.overlap(this.ship, this.powerupGroup, this.collectPower, null, this);
     }
     
     hitEnemy(_bullet, _enemy) {
@@ -42,12 +47,25 @@ class Play extends Phaser.State{
     	_enemy.kill();
     	this.starEmitter.setLocation(_enemy.x,_enemy.y);
     	this.starEmitter.startEmitter();
+    	var frp = new FireRatePower(this.game,_enemy.x,_enemy.y,null,this.ship);
+    	this.powerupGroup.add(frp);
     }
     
     endGame() {
         this.game.state.start('GameOver',true,false,this.score);
     }
 
+    collectPower(_ship,_power){
+    	if(this.ship.weapon.fireRate > 200){
+    		_power.collect(this.ship);
+		}
+    	else{
+    		this.score += 1;
+            this.labelScore.text = this.score;
+    	}
+    	_power.kill();
+    }
+    
     collectStar(_ship,_star) {
     	_star.kill();
         this.score += 1;

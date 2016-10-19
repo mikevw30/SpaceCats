@@ -33,7 +33,7 @@ class Ship extends Phaser.Sprite{
 	}
 	
 	addWeapon(){
-		this.weapon = game.add.weapon(20,'aquaball');
+		this.weapon = game.add.weapon(50,'aquaball');
 		this.weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
 	    this.weapon.fireRate = 350;
 	    this.weapon.fireAngle = Phaser.ANGLE_UP;
@@ -47,6 +47,8 @@ class Ship extends Phaser.Sprite{
 	}
 	
 	powerUpFireRate(){
-		this.weapon.fireRate += 100;
+		if (this.weapon.fireRate >100)
+			console.log("fireRate: "+this.weapon.fireRate);
+			this.weapon.fireRate -= 25;
 	}
 };

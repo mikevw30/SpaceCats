@@ -36,7 +36,6 @@ class Alien extends Phaser.Sprite{
 		this.weapon.trackSprite(this, 0, 0, true);
 	}
 	
-	
 	update(){
 		if(this.alive){
 			this.weapon.fire(this, this.target.x, this.target.y);

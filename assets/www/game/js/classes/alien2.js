@@ -18,6 +18,7 @@ class Alien2 extends Phaser.Sprite{
 		this.game.add.existing(this);
 		this.name = 'alien2';
 		this.scale.setTo(.5,.5); 
+		this.body.setSize(this.width,this.height);
 		this.anchor.setTo(0.5);
 		this.checkWorldBounds = true;
 		this.outOfBoundsKill = true;
