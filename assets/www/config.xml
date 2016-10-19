@@ -49,11 +49,11 @@
   <icon src="www/res/icon/windows-phone/icon-173-tile.png" gap:platform="winphone" gap:role="background"/>
   
   <!-- Whitelist setup -->
-  <gap:plugin name="cordova-plugin-whitelist" source="npm" />  
+<!--   <gap:plugin name="cordova-plugin-whitelist" source="npm" />   -->
   <!-- Allows everything -->
-  <allow-navigation href="*" />
-  <allow-intent href="*" />
-  <access origin="*" />
+<!--   <allow-navigation href="*" /> -->
+<!--   <allow-intent href="*" /> -->
+<!--   <access origin="*" /> -->
   
   <platform name="android">
   	<allow-navigation href="*" />
